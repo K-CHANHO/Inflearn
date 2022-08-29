@@ -1,0 +1,54 @@
+import java.util.Scanner;
+  
+public class Main {
+  public static void main(String[] args){
+    Scanner in=new Scanner(System.in);
+    String str = in.nextLine();
+    
+    
+    /* for-each문 이용
+    int max = Integer.MIN_VALUE;
+    String answer = "";
+    for(String x : chstr) {
+    	int len = x.length();
+    	if(len>max) {
+    		max = len;
+    		answer = x;
+    	}
+    }
+    System.out.println(answer);
+    */
+    
+    /* split함수 이용
+    String[] chstr = str.split(" ");
+    int max = chstr[0].length();
+    int index = 0;
+    for(int i=0; i<chstr.length; i++) {
+    	if(max < chstr[i].length()) {
+    		max = chstr[i].length();
+    		index = i;
+    	}
+    }    
+    System.out.println(chstr[index]);
+    */
+    
+    // indexof 및 while문 이용
+    int pos;
+    int m = Integer.MIN_VALUE;
+    String answer = "";
+    while((pos=str.indexOf(" "))!=-1) {
+    	String tmp = str.substring(0, pos);
+    	int len = tmp.length();
+    	if(len>m) {
+    		m = len;
+    		answer = tmp;
+    	}
+    	str = str.substring(pos+1);
+    }
+    if(str.length()>m) answer = str;
+    
+    System.out.println(answer);
+    
+    
+  }
+}
