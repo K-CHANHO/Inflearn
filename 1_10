@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void solution(String s, char t) {
+		char[] ch = s.toCharArray();
+		int len = s.length(), res = 100;
+		int[] answer = new int[len];
+		
+		for(int i=0; i<len; i++) {
+			if(ch[i] ==t) {
+				answer[i] = 0;
+				res = 0;
+			}
+			else {
+				answer[i] = ++res;
+			}
+		}
+		
+		res = 100;
+		for(int i=len-1; i>=0; i--) {
+			if(ch[i]==t) {				
+				res = 0;
+			}
+			else {
+				answer[i] = Math.min(answer[i], ++res);
+			}
+		}
+		
+		for(int i : answer) {
+			System.out.print(i + " ");
+		}
+		
+
+	}
+		
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String s = sc.next();
+		char t = sc.next().charAt(0);
+		solution(s, t);
+
+	}
+}
