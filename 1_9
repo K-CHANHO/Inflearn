@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class Main {
+	public static int solution(String str) {
+		String answer="";
+		answer = str.replaceAll("[^0-9]", "");
+		
+		int result = Integer.parseInt(answer);
+		
+		return result;
+	}
+		
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String str = sc.nextLine();
+		System.out.print(solution(str));
+
+	}
+}
+
