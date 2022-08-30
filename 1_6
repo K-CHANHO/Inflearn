@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class Main {
+	public static String delete(String str) {
+		String answer="";
+		char[] s = str.toCharArray();
+		
+		for(int i=0; i<s.length; i++) {
+			if(s[i]=='@') continue;
+			else {
+				for(int j=i+1; j<s.length; j++) {
+					if(s[j] == s[i]) s[j] = '@';
+				}
+			}
+		}
+		
+		for(int i=0; i<s.length; i++) {
+			if(s[i]!='@') answer+=String.valueOf(s[i]);
+		}
+				
+
+		return answer;
+	}
+		
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String str = sc.next();
+		System.out.print(delete(str));
+
+	}
+}
