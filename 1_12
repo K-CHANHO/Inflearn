@@ -1,0 +1,31 @@
+import java.util.Scanner;
+  
+public class inf1_12 {
+  public static void main(String[] args){
+    Scanner in=new Scanner(System.in);
+    int amount = in.nextInt();
+    String str = in.next();
+    Solution(amount, str);
+   
+  }
+
+  public static void Solution(int amount, String str) {
+   String answer = "";
+   String[] sen = new String[amount];
+   int[] toInt = new int[amount];
+   char[] toChar = new char[amount];
+   
+   for(int i=0; i<amount; i++) {
+      sen[i] = str.substring(7*i, 7*(i+1));
+      sen[i] = sen[i].replace('#', '1');
+      sen[i] = sen[i].replace('*', '0');
+      toInt[i] = Integer.parseInt(sen[i],2);
+      toChar[i] = (char)toInt[i];
+   }
+   
+   for(char x : toChar) {
+	   System.out.print(x);
+   }
+   
+  }
+}
