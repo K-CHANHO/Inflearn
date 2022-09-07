@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+	
+	public static void main(String[] args) {		
+		int n = sc.nextInt();
+		int[] ox = new int[n];
+		for(int i=0; i<n; i++) {
+			ox[i] = sc.nextInt();
+		}
+		System.out.print(solution(ox)); 
+	}
+	
+	static int solution(int[] ox) {
+		int[] score = new int[ox.length];
+		score[0] = ox[0];
+		
+		int answer = score[0]; // 점수 합
+		int cnt = score[0]; // 누적점수
+		
+		for(int i=1; i<score.length; i++) {
+			if(ox[i] == 0) {
+				score[i] = 0;
+				cnt = 0;
+			}
+			else if(ox[i]==ox[i-1]) {
+				ox[i] = ++cnt;
+				answer += ox[i];
+			}
+			else {
+				ox[i] = ++cnt;
+				answer += ox[i];
+			}
+		}
+		
+		return answer;
+		
+	}
+
+}
