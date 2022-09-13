@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+		
+	public static void main(String[] args) {		
+		int n = sc.nextInt();
+		int[] arr1 = new int[n];
+		for(int i=0; i<n; i++) {
+			arr1[i] = sc.nextInt();
+		}
+		
+		int m = sc.nextInt();
+		int[] arr2 = new int[m];
+		for(int i=0; i<m; i++) {
+			arr2[i] = sc.nextInt();
+		}
+		
+		for(int x : solution(arr1, arr2, n,m))
+				System.out.print(x + " ");
+		
+	}
+	
+	static int[] solution(int[] arr1, int[] arr2, int n, int m) {
+		int[] answer = new int[n+m];
+		int a=0,b=0,c=0;
+		while(c<n+m) {
+		if(a<n && b<m && arr1[a]<=arr2[b]) {
+			answer[c] = arr1[a];
+			a++; c++;
+		}
+		else if(a<n && b<m && arr1[a]>arr2[b]){
+			answer[c] = arr2[b];
+			b++; c++;
+		}
+		else if(a>=n || b>=m) {
+			if(n>=m) {
+					answer[c] = arr1[a];
+					a++; c++;	
+			}
+		
+			else {			
+					answer[c] = arr2[b];
+					b++; c++;
+		}
+		
+		}
+		}
+		return answer;
+		
+	}
+}
