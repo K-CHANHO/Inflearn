@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+		
+	public static void main(String[] args) {		
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		int[] arr = new int[n+1];
+		
+		for(int i=0; i<n; i++) {
+			arr[i] = sc.nextInt();
+		}
+		
+		System.out.print(solution(arr, n, m));
+					
+	}
+	
+	static int solution(int[] arr, int n, int m) {
+		int answer = 0, sum=0;
+		int p1 = 0, p2 = 0;
+		
+		while(p2<=n) {
+			if(sum>=m) {
+				if(sum==m) answer++;
+				sum -= arr[p1++];
+			}
+			else {
+				sum += arr[p2++];
+				
+			}
+		}
+		
+		return answer;
+		
+	}
+}
