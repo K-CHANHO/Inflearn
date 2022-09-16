@@ -1,0 +1,29 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+		
+	public static void main(String[] args) {				
+		int n = sc.nextInt();
+		int k = sc.nextInt();
+		int[] sales = new int[n];
+		for(int i=0; i<n; i++) sales[i] = sc.nextInt();
+		
+		solution(sales, n, k);
+					
+	}
+	
+	static void solution(int[] sales, int n, int k) {
+		HashMap<Integer, Integer> map = new HashMap<>();
+		
+		for(int i=0; i<n-k+1; i++) {
+			for(int j=i; j<k+i; j++) {
+				map.put(sales[j], map.getOrDefault(sales[j],0)+1);
+			}
+			System.out.print(map.size()+" ");
+			map.clear();
+		}
+		
+	}
+}
