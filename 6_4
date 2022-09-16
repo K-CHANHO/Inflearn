@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+		
+	public static void main(String[] args) {				
+		String s = sc.next();
+		String t = sc.next();
+		
+		System.out.print(solution(s, t));			
+		
+	}
+	
+	static int solution(String s, String t) {
+		int answer = 0;
+		HashMap<Character, Integer> HM = new HashMap<>();	
+		HashMap<Character, Integer> HM2 = new HashMap<>();
+		
+		char[] arr1 = s.toCharArray();
+		char[] arr2 = t.toCharArray();
+		int lt = 0;
+		
+		// t에 대한 해쉬맵 먼저 생성
+		for(char x:arr2) {
+			HM2.put(x, HM.getOrDefault(x, 0)+1);
+		}
+		
+		
+		for(int i=0; i<arr2.length-1; i++) {
+			HM.put(arr1[i], HM.getOrDefault(arr1[i], 0)+1);
+		}
+		
+		for(int rt=arr2.length-1; rt<arr1.length; rt++) {
+			HM.put(arr1[rt], HM.getOrDefault(arr1[rt], 0)+1);			
+			if(HM.equals(HM2)) answer++;
+			
+			HM.put(arr1[lt], HM.get(arr1[lt])-1);
+			if(HM.get(arr1[lt])==0) HM.remove(arr1[lt]);
+			lt++;
+			
+		}
+	
+		return answer;
+	
+	}
+}
