@@ -1,0 +1,38 @@
+import java.util.*;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+		
+	public static void main(String[] args) {				
+		int n = sc.nextInt();
+		int k = sc.nextInt();
+		int[] sales = new int[n];
+		for(int i=0; i<n; i++) sales[i] = sc.nextInt();
+		
+		
+		for(int x:solution(sales, n, k)) {
+		System.out.print(x+" ");			
+		}
+	}
+	
+	static ArrayList<Integer> solution(int[] sales, int n, int k) {
+		ArrayList<Integer> answer = new ArrayList<>();
+		HashMap<Integer, Integer> HM = new HashMap<>();
+		
+		for(int i=0; i<k-1; i++){
+			HM.put(sales[i], HM.getOrDefault(sales[i], 0)+1);
+		}
+		
+		int lt=0;
+		for(int rt=k-1; rt<n; rt++) {
+			HM.put(sales[rt], HM.getOrDefault(sales[rt], 0)+1);
+			answer.add(HM.size());
+			HM.put(sales[lt], HM.get(sales[lt])-1);
+			if(HM.get(sales[lt])==0) HM.remove(sales[lt]); 
+			lt++;
+		}
+		
+		return answer;
+		
+	}
+}
