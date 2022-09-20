@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+		
+	public static void main(String[] args) {				
+		String arr = sc.next();
+		
+		System.out.print(solution(arr));			
+		
+	}
+	
+	static String solution(String arr) {
+		String answer = "YES";
+		Stack<Character> ch = new Stack<>();
+		for(char x : arr.toCharArray()) {
+			if(x=='(') {
+				ch.push(x);
+			} else {
+				if(ch.isEmpty()) return "NO";
+				ch.pop();
+			}
+		}
+		if(!ch.isEmpty()) return "NO";
+		return answer;
+		
+	
+	}
+}
