@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+		
+	public static void main(String[] args) {				
+		String arr = sc.next();
+		
+		System.out.print(solution(arr));			
+		
+	}
+	
+	static int solution(String arr) {
+		int answer = 0;
+		Stack<Character> stack = new Stack<>();
+
+		for(int i=0; i<arr.length(); i++) {
+			if(arr.charAt(i)=='(') {
+				stack.push(arr.charAt(i));
+			}else {
+				if(arr.charAt(i-1)=='(') {
+					stack.pop();
+					answer += stack.size();
+				} else {
+					stack.pop();
+					answer += 1;
+				}
+			}
+		}
+		
+		return answer;
+		
+	}
+}
