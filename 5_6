@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+		
+	public static void main(String[] args) {				
+		int n = sc.nextInt();
+		int k = sc.nextInt();
+		int[] arr = new int[n];
+		for(int i=0; i<n; i++) arr[i] = i+1;
+		
+		System.out.print(solution(arr, k));			
+		
+	}
+	
+	static int solution(int[] arr, int k) {
+		int answer = 0;
+		Stack<Integer> stack = new Stack<>();
+		for(int x : arr) stack.push(x);
+		
+		while(stack.size()>1) {
+			for(int i=0; i<k-1; i++)
+				stack.push(stack.get(i));
+			
+			for(int i=0; i<k; i++)
+				stack.remove(0);
+	
+		}
+		
+		answer = stack.get(0);
+		return answer;
+		
+	}
+}
