@@ -30,7 +30,6 @@ public class Main {
 			arr[idx] = tmp;
 		}
 		
-
 		return arr;
 		
 	}
