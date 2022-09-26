@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {	
+		int s = sc.nextInt();
+		int n = sc.nextInt();
+		int[] arr = new int[n];
+		for(int i=0; i<n; i++) arr[i] = sc.nextInt();
+		
+		
+		solution(arr,s,n);
+		
+	}
+
+	static void solution(int[] arr, int s, int n) {
+		Deque<Integer> deque = new LinkedList<>();
+		for(int i=0; i<n; i++) {
+			if(deque.contains(arr[i])) {
+				// arr[i] 삭제하고 맨 앞으로
+				deque.removeFirstOccurrence(arr[i]);
+			} else if(deque.size()>=s) {
+				// 맨 뒤 삭제하고 추가
+				deque.removeLast();		
+			}
+			deque.addFirst(arr[i]);
+		}
+		
+		for(int i=0; i<s; i++) {
+			System.out.print(deque.poll()+" ");
+		}
+		
+	}
+}
