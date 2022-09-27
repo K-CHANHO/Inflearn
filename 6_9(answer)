@@ -1,0 +1,49 @@
+import java.util.*;
+import java.util.stream.IntStream;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		int[] arr= new int[n];
+		for(int i=0; i<n; i++) {
+			arr[i] = sc.nextInt();
+		}
+		
+		System.out.print(solution(arr, n, m));
+	}
+
+	static int solution(int[] arr, int n, int m) {
+		int answer = 0;
+		int lt= Arrays.stream(arr).max().getAsInt(); // 최댓값을 시작점으로.
+		int rt = Arrays.stream(arr).sum(); // 총 합을 끝점으로.
+		
+		while(lt<=rt) {
+			int mid = (lt+rt)/2;
+			if(count(arr,mid) <=m) { // 앨범 갯수가 m보다 작거나 같으면 조건 만족
+				answer=mid;
+				rt = mid-1; // 끝 점을 옮겨서 다시 진행
+			} else {
+				lt = mid+1; // 아니면 시작점을 옮겨서 다시 진행
+			}
+		}
+		
+		return answer;
+	}
+	
+	static int count(int [] arr, int capacity) {
+		int cnt=1, sum=0; // cnt는 앨범 갯수, sum은 총 길이
+		for(int x:arr) {
+			if(sum+x>capacity) { // sum+x 길이가 용량보다 커지면
+				cnt++; // 앨범 하나 추가
+				sum=x; // 새로운 앨범 길이는 x부터 시작
+			}
+			else sum+=x; // sum+x 길이가 용량보다 작으면 x 추가
+		}
+		
+		return cnt;
+	}
+
+}
