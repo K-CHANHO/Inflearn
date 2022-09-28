@@ -1,0 +1,52 @@
+import java.util.*;
+import java.util.stream.IntStream;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		int n = sc.nextInt();
+		int c = sc.nextInt();
+		int[] arr= new int[n];
+		for(int i=0; i<n; i++) {
+			arr[i] = sc.nextInt();
+		}
+		
+		System.out.print(solution(arr, n, c));
+	}
+
+	static int solution(int[] arr, int n, int c) {
+		int answer = 0;
+		Arrays.sort(arr);
+		// 두 말 사이의 거리를 범위로 잡는다. 즉 최솟값은 1, 최댓값은 배열의 최대에서 최소를 뺀 값.
+		int lt= 1;
+		int rt = Arrays.stream(arr).max().getAsInt() - Arrays.stream(arr).min().getAsInt();
+		
+		while(lt<=rt) { // 이분검색 알고리즘
+			int mid = (lt+rt)/2;
+			if(count(arr,mid) >=c) { // 유효성 검사, c보다 크면 유효하다.
+				answer=mid;
+				lt = mid+1;
+			} else {
+				rt = mid-1;
+			}
+		}
+		
+		return answer;
+	}
+	
+	static int count(int [] arr, int dist) {
+		int cnt=1; // 한마리는 제일 왼쪽에 무조건 배치
+		int ep=arr[0]; // 첫번째 말 좌표 부터 시작
+		for(int i=1; i<arr.length; i++) {
+			if(arr[i]-ep>=dist) { // 다음 마굿간에서 이전 마굿간의 거리가 정해진 값보다 크면 배치 가능함.
+				cnt++; // 말 1마리 증가
+				ep = arr[i]; // 그 다음 마굿간 사이의 거리를 구해야하므로.
+			}
+		}
+		
+		
+		return cnt; // 말의 수 리턴
+	}
+
+}
