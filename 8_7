@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class Main{
+	static Scanner sc = new Scanner(System.in);
+	static int n, r;
+	static int[][] memo;
+	
+	public static int DFS(int n, int r) {
+		if(memo[n][r] > 0) return memo[n][r];
+		
+		if(r==1) return n;
+		else if(r==n) return 1;
+		else {
+			memo[n][r] = DFS(n-1, r-1) + DFS(n-1,r);
+		}
+		
+		return memo[n][r];
+	}
+	
+    public static void main(String[] args){
+    	n = sc.nextInt();
+    	r = sc.nextInt();
+    	memo = new int[n+1][r+1];
+    	System.out.print(DFS(n,r));
+    }
+}
