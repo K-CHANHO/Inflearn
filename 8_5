@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class Main{
+	static Scanner sc = new Scanner(System.in);
+	static int n, m, min=Integer.MAX_VALUE;
+	static Integer[] money;
+	
+	public static void DFS(int L, int sum) {
+		if(sum > m || L>=min) return;
+		if(sum ==m) {
+			min = Math.min(L, min);
+		} else {
+			for(int i=0; i<n; i++)
+				DFS(L+1, sum+money[i]);
+		}
+	}
+	
+    public static void main(String[] args){
+    	n = sc.nextInt();
+    	money = new Integer[n];
+    	for(int i=0; i<n; i++) {
+    		money[i] = sc.nextInt();
+    	}
+    	m = sc.nextInt();
+    	Arrays.sort(money, Collections.reverseOrder());
+    	
+    	DFS(0,0);
+    	System.out.print(min);
+    }
+}
