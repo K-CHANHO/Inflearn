@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Main {
+	static Scanner sc = new Scanner(System.in);
+	static int[][] q = new int[7][7];
+	static int count = 0;
+	public static void DFS(int a, int b) {
+		if(a>6 || b>6 || a<0 || b<0) return;
+		if(a==6 && b==6) {
+			count++;
+		} else {
+			if(q[a][b]==0) {
+				q[a][b]=1;
+				DFS(a+1,b);
+				DFS(a-1,b);
+				DFS(a,b+1);
+				DFS(a,b-1);
+				q[a][b]=0;
+			}
+		}
+	}
+	
+	public static void main(String args[]) {		
+		for(int i=0; i<7; i++) {
+			for(int j=0; j<7; j++) {
+				q[i][j] = sc.nextInt();
+			}
+		}
+		
+		DFS(0,0);
+		System.out.print(count);
+		
+	}
+		
+}
