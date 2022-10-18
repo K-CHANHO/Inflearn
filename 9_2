@@ -1,0 +1,53 @@
+import java.util.*;
+
+class Point implements Comparable<Point> {
+	int x, y;
+	Point(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	
+	@Override
+	public int compareTo(Point o) {
+		if(o.y == this.y) return this.x-o.x;
+		else return this.y - o.y;
+	}
+}
+
+class Main {
+	
+	public int solution(ArrayList<Point> arr, int n){
+		int answer = 1;
+		Collections.sort(arr);
+		/*
+		for(Point x : arr) {
+			System.out.println(x.x + " " + x.y);
+		}
+		*/
+		
+		for(int i=0; i<n-1; i++) {
+			for(int j=i+1; j<n; j++) {
+				if(arr.get(i).y <= arr.get(j).x) {
+					answer++; 
+					i = j-1;
+					break;
+				}
+			}
+		}
+		return answer;
+	}
+
+	public static void main(String[] args){
+		Main T = new Main();
+		Scanner sc = new Scanner(System.in);
+		int n=sc.nextInt();
+		ArrayList<Point> time = new ArrayList<>();
+		for(int i=0; i<n; i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			time.add(new Point(a,b));
+		}
+		
+		System.out.print(T.solution(time, n));
+	}
+}
