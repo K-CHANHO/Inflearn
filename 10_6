@@ -1,0 +1,49 @@
+import java.util.*;
+
+class question implements Comparable<question>{
+	int score, time;
+	question(int score, int time) {
+		this.score = score;
+		this.time = time;
+	}
+	public int compareTo(question o) {
+		if(this.time == o.time) return o.score - this.score;
+		return this.time - o.time;
+	}
+}
+
+class Main {
+	static ArrayList<question> qs = new ArrayList<>();
+	static int[] msc;
+	
+	public int solution(ArrayList<question> qs) {
+		Collections.sort(qs);
+		msc[0] = 0;
+		
+		for(int i=0; i<qs.size(); i++) {
+			for(int j=msc.length-1; j>=qs.get(i).time; j--) {
+				msc[j] = Math.max(msc[j], msc[j-qs.get(i).time] + qs.get(i).score);
+			}
+		}
+		
+		return msc[msc.length-1];
+	}
+
+	public static void main(String[] args){
+		Main T = new Main();
+		Scanner sc = new Scanner(System.in);
+		
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		msc = new int[m+1];
+		
+		for(int i=0; i<n; i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			qs.add(new question(a,b));		
+		}
+			
+		System.out.print(T.solution(qs));
+
+	}
+}
