@@ -1,0 +1,37 @@
+import java.util.*;
+
+class Main {
+	static int[] dy;
+	
+	public int solution(int[] coin, int m) {
+
+		for(int i=0; i<coin.length; i++) {
+			for(int j=coin[i]; j<=m; j++) {
+				int tmp = dy[j-coin[i]] + 1;
+				if(tmp<dy[j]) dy[j] = tmp;
+			}
+		}
+		int answer= dy[m];
+		
+		return answer;
+	}
+
+	public static void main(String[] args){
+		Main T = new Main();
+		Scanner sc = new Scanner(System.in);
+		
+		int n = sc.nextInt();
+		int[] coin = new int[n];
+		for(int i=0; i<n; i++) {
+			coin[i] = sc.nextInt();
+			
+		}
+		int m = sc.nextInt();
+		dy = new int[m+1];
+		Arrays.fill(dy, Integer.MAX_VALUE);
+		dy[0] = 0;
+		System.out.print(T.solution(coin, m));
+
+
+	}
+}
